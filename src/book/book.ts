@@ -5,7 +5,4 @@ export class Book {
   constructor() {
     this.id = newUuid();
   }
-  getID() {
-    return this.id;
-  }
 }

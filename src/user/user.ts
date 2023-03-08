@@ -5,7 +5,4 @@ export class User {
   constructor() {
     this.id = newUuid();
   }
-  getID(): string {
-    return this.id;
-  }
 }
