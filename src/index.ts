@@ -10,9 +10,8 @@ const library = new Library(bookList, userList);
 const book1 = new Book();
 const book2 = new Book();
 const user1 = new User();
+const user2 = new User();
 
-library.addBook(book1);
-library.addBook(book2, 2);
-console.log("po dodaniu:", library.availableBooks);
-library.removeBook(book2);
-console.log("po usunięciu:", library.availableBooks);
+library.addUser(user1);
+library.addUser(user1);
+console.log(library.userList.getUserList());
