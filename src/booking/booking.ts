@@ -15,10 +15,10 @@ export class Booking {
     return this.userID;
   }
   addBooks(book: Book, quantity: number = 1): void {
-    this.bookings.addBooks(book.id, quantity);
+    this.bookings.addBook(book, quantity);
   }
   removeBooks(book: Book, quantity: number = 1): void {
-    this.bookings.removeBooks(book.id, quantity);
+    this.bookings.removeBook(book, quantity);
   }
   returnBooks(): BookList {
     return this.bookings;

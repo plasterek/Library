@@ -1,42 +1,39 @@
+import { Book } from "./book.js";
+import { BookWithQuantity } from "./interfaces/bookWithQuantity.interface.js";
+import { removeItemFromArray } from "../helpers/removeItemFromArray.js";
+
 export class BookList {
-  private list: Map<string, number>;
+  private bookList: BookWithQuantity[];
   constructor() {
-    this.list = new Map();
+    this.bookList = [];
   }
-  public addBooks(id: string, quantity: number = 1): void {
-    let itemQuantity: number | undefined = this.list.get(id);
-    console.log("quant", itemQuantity);
-    if (itemQuantity) {
-      itemQuantity += quantity;
-      this.list.set(id, itemQuantity);
+  public addBook(book: Book, quantity: number = 1): void {
+    const bookExists: BookWithQuantity | undefined = this.bookExists(book);
+    if (bookExists) {
+      bookExists.quantity += quantity;
       return;
     }
-    this.list.set(id, quantity);
+    this.bookList.push({ book: book, quantity: quantity });
   }
-  public removeBooks(id: string, quantity: number = 1): void {
+  public removeBook(book: Book, quantity: number = 1): void {
     try {
-      let itemQuantity: number | undefined = this.list.get(id);
-      if (itemQuantity) {
-        if (quantity === itemQuantity) {
-          this.list.delete(id);
+      const bookExists: BookWithQuantity | undefined = this.bookExists(book);
+      if (bookExists) {
+        if (quantity === bookExists.quantity) {
+          removeItemFromArray(this.bookList, bookExists);
           return;
-        } else if (quantity > itemQuantity) {
-          throw new Error("Trying to delete to many items!");
+        } else if (quantity > bookExists.quantity) {
+          throw new Error("Trying to remove too many books!");
         }
-        itemQuantity -= quantity;
-        this.list.set(id, itemQuantity);
+        bookExists.quantity -= quantity;
         return;
       }
-      throw new Error("Nothing to remove!");
+      throw new Error("Book does not exist!");
     } catch (err: any) {
       throw new Error(err.message);
     }
   }
-  public getQuantity(id: string): number {
-    const quantity: number | undefined = this.list.get(id);
-    if (!quantity) {
-      return 0;
-    }
-    return quantity;
+  private bookExists(book: Book): BookWithQuantity | undefined {
+    return this.bookList.find((books) => books.book.id === book.id);
   }
 }
