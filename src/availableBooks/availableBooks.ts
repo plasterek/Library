@@ -1,12 +1,7 @@
 import { Book } from "../book/book.js";
-import { User } from "../user/user.js";
 
-export class Booking {
-  readonly userID: string;
+export class AvailableBooks {
   private books: Map<string, number> = new Map();
-  constructor(user: User) {
-    this.userID = user.id;
-  }
 
   public addBook(book: Book, quantity: number = 1): void {
     let bookQuantity: number | undefined = this.getBookQuantity(book);
@@ -17,12 +12,12 @@ export class Booking {
     }
     this.books.set(book.id, quantity);
   }
-  public removeBook(book: Book, quantity: number = 1): void {
+  public borrowBook(book: Book, quantity: number = 1): void {
     try {
       let bookQuantity: number | undefined = this.getBookQuantity(book);
       if (bookQuantity) {
         if (bookQuantity < quantity) {
-          throw new Error("Trying to remove too many books from booking!");
+          throw new Error("Book is not available!");
         } else if (bookQuantity === quantity) {
           this.books.delete(book.id);
           return;
@@ -31,12 +26,12 @@ export class Booking {
         this.books.set(book.id, bookQuantity);
         return;
       }
-      throw new Error("Book does not exists in this booking!");
+      throw new Error("Book is not available!");
     } catch (err: any) {
       throw new Error(err.message);
     }
   }
-  public getBooks(): Map<string, number> {
+  public getBooks() {
     return this.books;
   }
   private getBookQuantity(book: Book): number | undefined {
