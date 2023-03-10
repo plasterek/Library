@@ -3,10 +3,8 @@ import { BookWithQuantity } from "./interfaces/bookWithQuantity.interface.js";
 import { removeItemFromArray } from "../helpers/removeItemFromArray.js";
 
 export class BookList {
-  private bookList: BookWithQuantity[];
-  constructor() {
-    this.bookList = [];
-  }
+  private bookList: BookWithQuantity[] = [];
+
   public addBook(book: Book, quantity: number = 1): void {
     const bookExists: BookWithQuantity | undefined = this.bookExists(book);
     if (bookExists) {
@@ -32,6 +30,11 @@ export class BookList {
     } catch (err: any) {
       throw new Error(err.message);
     }
+  }
+  public findBookByID(bookID: string): Book {
+    const book = this.bookList.find((book) => book.book.id === bookID);
+    if (!book) throw new Error("Book does not exist!");
+    return book.book;
   }
   private bookExists(book: Book): BookWithQuantity | undefined {
     return this.bookList.find((books) => books.book.id === book.id);
