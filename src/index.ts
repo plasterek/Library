@@ -1,17 +1,10 @@
-import { Book } from "./book/book.js";
-import { Library } from "./library/library.js";
-import { BookList } from "./book/bookList.js";
-import { UserList } from "./user/userList.js";
-import { User } from "./user/user.js";
+import { Library } from "./library/Library.component.js";
+import { BookList } from "./book/BookList.service.js";
+import { UserList } from "./user/UserList.service.js";
+import { Booking } from "./booking/Booking.service.js";
+import { Book } from "./book/Book.service.js";
 
-const bookList = new BookList();
-const userList = new UserList();
-const library = new Library(bookList, userList);
-const book1 = new Book();
-const book2 = new Book();
-const user1 = new User();
-const user2 = new User();
-
-library.addUser(user1);
-library.addUser(user1);
-console.log(library.userList.getUserList());
+const bookList: BookList = new BookList();
+const userList: UserList = new UserList();
+const bookings: Booking = new Booking();
+const library: Library = new Library(bookList, userList, bookings);
