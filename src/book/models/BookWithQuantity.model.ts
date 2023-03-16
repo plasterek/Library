@@ -1,4 +1,4 @@
-import { Book } from "../book.js";
+import { Book } from "../Book.service.js";
 
 export interface BookWithQuantity {
   book: Book;

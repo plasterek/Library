@@ -2,9 +2,12 @@ import { v4 as newUuid } from "uuid";
 
 export class User {
   readonly id: string = newUuid();
+  readonly name: string;
   private bannedTill: Date | false = false;
   private penaltyPoints: number = 0;
-
+  constructor(name: string) {
+    this.name = name;
+  }
   public unBan(): void {
     this.bannedTill = false;
   }
