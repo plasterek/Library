@@ -1,6 +1,6 @@
 import { Book } from "./Book.service.js";
 import { BookWithQuantity } from "./models/BookWithQuantity.model.js";
-import { removeItemFromArray } from "../helpers/removeItemFromArray.js";
+import { removeItemFromArray } from "../helpers/removeItemFromArray";
 
 export class BookList {
   private readonly bookList: BookWithQuantity[] = [];

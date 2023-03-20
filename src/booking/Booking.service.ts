@@ -1,5 +1,5 @@
 import { BookingObject } from "./models/BookingObject.model.js";
-import { removeItemFromArray } from "../helpers/removeItemFromArray.js";
+import { removeItemFromArray } from "../helpers/removeItemFromArray";
 
 export class Booking {
   private readonly bookings: BookingObject[] = [];

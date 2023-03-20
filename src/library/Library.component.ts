@@ -3,7 +3,7 @@ import { Book } from "../book/Book.service.js";
 import { UserList } from "../user/UserList.service.js";
 import { User } from "../user/User.service.js";
 import { Booking } from "../booking/Booking.service.js";
-import { countPenalty } from "../penalty/CountPenalty.service.js";
+import { countPenalty } from "../penalty/CountPenalty.service";
 
 export class Library {
   private readonly bookList: BookList;
@@ -39,7 +39,7 @@ export class Library {
     const books = this.bookings.returnBooks(user.id);
     this.makeBooksAvailable(books);
     const penalty = countPenalty(returnDate);
-    userExist.setPenalty(penalty);
+    if (penalty > 0) userExist.setPenalty(penalty);
   }
   private makeBooksUnavailable(books: Map<string, number>): void {
     books.forEach((value, key) => {

@@ -1,5 +1,5 @@
 import { User } from "./User.service.js";
-import { removeItemFromArray } from "../helpers/removeItemFromArray.js";
+import { removeItemFromArray } from "../helpers/removeItemFromArray";
 
 export class UserList {
   private userList: User[] = [];
