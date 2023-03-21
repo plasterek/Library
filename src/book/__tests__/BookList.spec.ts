@@ -3,14 +3,15 @@ import { BookList } from "../BookList.service";
 import { BookWithQuantity } from "../models/BookWithQuantity.model";
 
 describe("BookList class", () => {
+  //given
   const book: Book = new Book("author", "title");
+  let bookList: BookList = new BookList();
   beforeEach(() => {
     jest.clearAllMocks();
+    bookList = new BookList();
   });
   describe("When adding a book to BookList", () => {
     it("Book quantity should change", () => {
-      //given
-      const bookList: BookList = new BookList();
       //when
       bookList.addBook(book);
       bookList.addBook(book);
@@ -22,7 +23,6 @@ describe("BookList class", () => {
   describe("When borrowing a book and everything went well", () => {
     it("findBookByID method should be called", () => {
       //given
-      const bookList: BookList = new BookList();
       const findBookByID = jest
         .spyOn(bookList, "findBookByID")
         .mockImplementation();
@@ -34,7 +34,7 @@ describe("BookList class", () => {
     });
     it("Given book quantity should change", () => {
       //given
-      const bookList: BookList = new BookList();
+
       const numberOfBooks: number = 5;
       bookList.addBook(book, numberOfBooks);
       //when
@@ -46,16 +46,13 @@ describe("BookList class", () => {
   });
   describe("When borrowing a book and it does not exist", () => {
     it("It should throw and exception", () => {
-      //given
-      const bookList: BookList = new BookList();
       //then
       expect(() => bookList.borrowBook(book)).toThrow();
     });
   });
   describe("When trying to borrow more books than are listed", () => {
     it("It should throw an exception", () => {
-      //given
-      const bookList: BookList = new BookList();
+      //when
       bookList.addBook(book, 1);
       //then
       expect(() => bookList.borrowBook(book, 5)).toThrow();
@@ -64,7 +61,6 @@ describe("BookList class", () => {
   describe("When removing a book and everything went well", () => {
     it("findBookByID method should be called", () => {
       //given
-      const bookList: BookList = new BookList();
       const findBookByID = jest
         .spyOn(bookList, "findBookByID")
         .mockImplementation();
@@ -75,8 +71,6 @@ describe("BookList class", () => {
       expect(findBookByID).toBeCalled();
     });
     it("Given book should no longer exist on list", () => {
-      //given
-      const bookList: BookList = new BookList();
       //when
       bookList.addBook(book);
       bookList.removeBook(book);
@@ -86,24 +80,18 @@ describe("BookList class", () => {
   });
   describe("When removing a book and it does not exist on list", () => {
     it("It should throw and exception", () => {
-      //given
-      const bookList: BookList = new BookList();
       //then
       expect(() => bookList.removeBook(book)).toThrow();
     });
   });
   describe("When trying to find book by ID and it does not exist on list", () => {
     it("It shoud throw an exception", () => {
-      //given
-      const bookList: BookList = new BookList();
       //then
       expect(() => bookList.findBookByID(book.id)).toThrow();
     });
   });
   describe("When trying to find book by ID and it does exist on list", () => {
     it("It shoud return BookWithQuantity object", () => {
-      //given
-      const bookList: BookList = new BookList();
       //when
       bookList.addBook(book);
       //then

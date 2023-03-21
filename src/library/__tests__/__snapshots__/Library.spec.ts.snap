@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Library class When removing a book and and there is only 1 book Book list should be empty 1`] = `
+BookList {
+  "bookList": [],
+}
+`;
+
+exports[`Library class When trying to remove user and there is only one given user in library User list should be empty 1`] = `
+UserList {
+  "userList": [],
+}
+`;
